@@ -1,0 +1,23 @@
+{
+  "name": "habita-go",
+  "version": "1.0.0",
+  "description": "Plataforma web estilo Airbnb para reservar alojamientos",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "airbnb",
+    "alojamientos",
+    "reservas"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

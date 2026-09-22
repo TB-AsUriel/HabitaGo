@@ -1,0 +1,243 @@
+[
+  {
+    "id": 1,
+    "titulo": "Departamento loft con terraza privada",
+    "categoria": "Departamento",
+    "ciudad": "Ciudad de México",
+    "pais": "México",
+    "precioPorNoche": 1450,
+    "huespedes": 4,
+    "habitaciones": 2,
+    "banos": 1,
+    "valoracion": 4.9,
+    "numValoraciones": 128,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688",
+      "https://images.unsplash.com/photo-1524758631624-e2822e304c36"
+    ],
+    "descripcion": "Loft moderno en el corazón de la Condesa con terraza privada, ideal para disfrutar de la vibrante vida capitalina. A dos cuadras de los mejores cafés y parques.",
+    "comodidades": ["Wifi", "Cocina", "Terraza", "Aire acondicionado", "TV", "Cafetera"],
+    "ubicacion": "Condesa, Ciudad de México"
+  },
+  {
+    "id": 2,
+    "titulo": "Casa colonial restaurada en el centro",
+    "categoria": "Casa",
+    "ciudad": "Mérida",
+    "pais": "México",
+    "precioPorNoche": 980,
+    "huespedes": 6,
+    "habitaciones": 3,
+    "banos": 2,
+    "valoracion": 4.8,
+    "numValoraciones": 207,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+    ],
+    "descripcion": "Encantadora casona colonial del siglo XIX restaurada, con patio interior, chimenea y muebles artesanales yucatecos.",
+    "comodidades": ["Wifi", "Piscina", "Patio", "Chimenea", "Aparcamiento"],
+    "ubicacion": "Centro Histórico, Mérida"
+  },
+  {
+    "id": 3,
+    "titulo": "Cabaña de montaña con vista al bosque",
+    "categoria": "Cabaña",
+    "ciudad": "Valle de Bravo",
+    "pais": "México",
+    "precioPorNoche": 2200,
+    "huespedes": 4,
+    "habitaciones": 2,
+    "banos": 2,
+    "valoracion": 4.9,
+    "numValoraciones": 94,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1510798831971-661eb04b3739",
+      "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8"
+    ],
+    "descripcion": "Cabaña acogedora entre pinos con chimenea, jacuzzi exterior y vista panorámica al lago. Perfecta para desconectarte del mundo.",
+    "comodidades": ["Wifi", "Chimenea", "Jacuzzi", "Cocina", "Aparcamiento"],
+    "ubicacion": "Cerca del lago, Valle de Bravo"
+  },
+  {
+    "id": 4,
+    "titulo": "Penthouse frente al mar con infinity pool",
+    "categoria": "Casa",
+    "ciudad": "Tulum",
+    "pais": "México",
+    "precioPorNoche": 4800,
+    "huespedes": 8,
+    "habitaciones": 4,
+    "banos": 4,
+    "valoracion": 5.0,
+    "numValoraciones": 356,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4",
+      "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9"
+    ],
+    "descripcion": "Penthouse de lujo frente al Caribe con infinity pool, acceso directo a la playa y atardeceres inolvidables.",
+    "comodidades": ["Piscina", "Wifi", "Aire acondicionado", "Gimnasio", "Chef privado", "Aparcamiento"],
+    "ubicacion": "Zona Hotelera, Tulum"
+  },
+  {
+    "id": 5,
+    "titulo": "Estudio minimalista en pleno centro",
+    "categoria": "Departamento",
+    "ciudad": "Buenos Aires",
+    "pais": "Argentina",
+    "precioPorNoche": 780,
+    "huespedes": 2,
+    "habitaciones": 1,
+    "banos": 1,
+    "valoracion": 4.7,
+    "numValoraciones": 152,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2",
+      "https://images.unsplash.com/photo-1554995207-c18c203602cb"
+    ],
+    "descripcion": "Estudio luminoso y minimalista en Palermo Soho, rodeado de diseño, gastronomía y vida nocturna porteña.",
+    "comodidades": ["Wifi", "Cocina", "Aire acondicionado", "Ascensor", "TV"],
+    "ubicacion": "Palermo Soho, Buenos Aires"
+  },
+  {
+    "id": 6,
+    "titulo": "Villa mediterránea con jardín botánico",
+    "categoria": "Casa",
+    "ciudad": "Barcelona",
+    "pais": "España",
+    "precioPorNoche": 3200,
+    "huespedes": 10,
+    "habitaciones": 5,
+    "banos": 4,
+    "valoracion": 4.9,
+    "numValoraciones": 289,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d",
+      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914"
+    ],
+    "descripcion": "Espectacular villa con jardín botánico, piscina climatizada y terraza panorámica con vistas a Barcelona. Elegante, luminosa y perfecta para grupos grandes.",
+    "comodidades": ["Piscina", "Wifi", "Cocina", "Aire acondicionado", "Aparcamiento", "Jardín"],
+    "ubicacion": "Zona alta, Barcelona"
+  },
+  {
+    "id": 7,
+    "titulo": "Loft industrial para parejas",
+    "categoria": "Estudio",
+    "ciudad": "Madrid",
+    "pais": "España",
+    "precioPorNoche": 890,
+    "huespedes": 2,
+    "habitaciones": 1,
+    "banos": 1,
+    "valoracion": 4.6,
+    "numValoraciones": 77,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1560185007-cde436f6a4d0",
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"
+    ],
+    "descripcion": "Loft industrial con techos altos y vigas de hierro en Malasaña, el barrio más alternativo de Madrid.",
+    "comodidades": ["Wifi", "Cocina", "Aire acondicionado", "Lavadora"],
+    "ubicacion": "Malasaña, Madrid"
+  },
+  {
+    "id": 8,
+    "titulo": "Casa flotante sobre el lago",
+    "categoria": "Experiencia",
+    "ciudad": "Mariposa",
+    "pais": "Chile",
+    "precioPorNoche": 2600,
+    "huespedes": 5,
+    "habitaciones": 2,
+    "banos": 1,
+    "valoracion": 4.9,
+    "numValoraciones": 64,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1471922694854-ff1b63b20054",
+      "https://images.unsplash.com/photo-1586541786523-c1e3690b0a2e"
+    ],
+    "descripcion": "Casa flotante sostenible en un lago de la Patagonia, con kayak incluido y estrellas deslumbrantes. Una experiencia inolvidable.",
+    "comodidades": ["Wifi", "Cocina", "Kayak", "Cafetera", "Terapia de sol y agua"],
+    "ubicacion": "Lago Llanquihue, Chile"
+  },
+  {
+    "id": 9,
+    "titulo": "Departamento boutique con rooftop",
+    "categoria": "Departamento",
+    "ciudad": "Lima",
+    "pais": "Perú",
+    "precioPorNoche": 690,
+    "huespedes": 3,
+    "habitaciones": 2,
+    "banos": 1,
+    "valoracion": 4.8,
+    "numValoraciones": 118,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1493809842364-78817add7ffb",
+      "https://images.unsplash.com/photo-1505691938895-1758d7feb511"
+    ],
+    "descripcion": "Departamento boutique en Miraflores con acceso a rooftop con vista al océano Pacífico y a solo pasos del malecón.",
+    "comodidades": ["Wifi", "Rooftop", "Cocina", "Aire acondicionado", "Lavadora"],
+    "ubicacion": "Miraflores, Lima"
+  },
+  {
+    "id": 10,
+    "titulo": "Chalet alpino con recorrido de senderismo",
+    "categoria": "Cabaña",
+    "ciudad": "Valparaíso",
+    "pais": "Chile",
+    "precioPorNoche": 1500,
+    "huespedes": 6,
+    "habitaciones": 3,
+    "banos": 2,
+    "valoracion": 4.7,
+    "numValoraciones": 201,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1508739773434-c26b3d09e071",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c"
+    ],
+    "descripcion": "Chalet de estilo alpino situado entre selva y mar, perfecto para amantes del senderismo. Con sauna finlandesa y fogón exterior.",
+    "comodidades": ["Wifi", "Sauna", "Chimenea", "Cocina", "Aparcamiento"],
+    "ubicacion": "Quintay, Valparaíso"
+  },
+  {
+    "id": 11,
+    "titulo": "Ático deluxe con piscina climatizada",
+    "categoria": "Departamento",
+    "ciudad": "Riviera Maya",
+    "pais": "México",
+    "precioPorNoche": 3900,
+    "huespedes": 6,
+    "habitaciones": 3,
+    "banos": 3,
+    "valoracion": 4.9,
+    "numValoraciones": 432,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1586348943529-beaae6c28db9",
+      "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd"
+    ],
+    "descripcion": "Ático deluxe en la Riviera Maya con piscina privada climatizada, bar en la terraza y acceso directo a la playa de arena blanca.",
+    "comodidades": ["Piscina", "Wifi", "Bar", "Aire acondicionado", "Aparcamiento", "Gimnasio"],
+    "ubicacion": "Playa del Carmen, Riviera Maya"
+  },
+  {
+    "id": 12,
+    "titulo": "Tienda de campaña de lujo (glamping)",
+    "categoria": "Experiencia",
+    "ciudad": "Cuernavaca",
+    "pais": "México",
+    "precioPorNoche": 1750,
+    "huespedes": 2,
+    "habitaciones": 1,
+    "banos": 1,
+    "valoracion": 4.8,
+    "numValoraciones": 96,
+    "imagenes": [
+      "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4",
+      "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1"
+    ],
+    "descripcion": "Glamping de lujo bajo las estrellas con cama king, cena campestre incluida y fogata privada. El romance perfecto en la naturaleza.",
+    "comodidades": ["Wifi", "Fogata", "Cena incluida", "Cafetera", "Senderismo"],
+    "ubicacion": "Bosque de Cuernavaca, México"
+  }
+]
