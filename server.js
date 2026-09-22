@@ -17,8 +17,24 @@ function writeJSON(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
 }
 
+const ARCHIVOS_PRIVADOS = [
+  '/server.js',
+  '/package.json',
+  '/package-lock.json',
+  '/data/bookings.json'
+];
+
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use((req, res, next) => {
+  if (
+    req.path.startsWith('/node_modules') ||
+    ARCHIVOS_PRIVADOS.includes(req.path)
+  ) {
+    return res.status(404).end();
+  }
+  next();
+});
+app.use(express.static(__dirname));
 
 app.get('/api/properties', (req, res) => {
   let properties = readJSON(PROPERTIES_FILE);
@@ -122,7 +138,7 @@ app.post('/api/bookings', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.use((err, req, res, next) => {

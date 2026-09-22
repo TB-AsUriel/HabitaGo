@@ -5,6 +5,10 @@ const API = {
   bookings: '/api/bookings'
 };
 
+const BOOKINGS_KEY = 'habitago-reservas';
+
+let modo = 'api';
+
 const moneda = (n) => `$${Number(n).toLocaleString('es-MX')}`;
 
 const FAVORITOS_KEY = 'habitago-favoritos';
@@ -20,6 +24,143 @@ async function fetchJSON(url) {
   if (!res.ok) throw new Error(`Error ${res.status}`);
   return res.json();
 }
+
+// ---------- Capa de datos (modo híbrido) ----------
+
+async function detectarModo() {
+  try {
+    const res = await fetch('/api/properties');
+    if (res.ok) {
+      modo = 'api';
+    } else {
+      modo = 'static';
+    }
+  } catch {
+    modo = 'static';
+  }
+}
+
+let cachePropiedades = null;
+
+async function obtenerPropiedades() {
+  if (modo === 'api') {
+    return fetchJSON(API.properties);
+  }
+  if (!cachePropiedades) {
+    cachePropiedades = await fetchJSON('data/properties.json');
+  }
+  return cachePropiedades;
+}
+
+function filtrarPropiedades(lista, params) {
+  const ciudad = (params.get('ciudad') || '').toLowerCase();
+  const categoria = (params.get('categoria') || '').toLowerCase();
+  const huespedes = params.get('huespedes');
+  const precioMin = params.get('precioMin');
+  const precioMax = params.get('precioMax');
+
+  return lista.filter((p) => {
+    if (ciudad && !p.ciudad.toLowerCase().includes(ciudad)) return false;
+    if (categoria && p.categoria.toLowerCase() !== categoria) return false;
+    if (huespedes && p.huespedes < Number(huespedes)) return false;
+    if (precioMin && p.precioPorNoche < Number(precioMin)) return false;
+    if (precioMax && p.precioPorNoche > Number(precioMax)) return false;
+    return true;
+  });
+}
+
+async function buscarPropiedades(params) {
+  if (modo === 'api') {
+    const qs = params.toString();
+    return fetchJSON(`${API.properties}${qs ? `?${qs}` : ''}`);
+  }
+  const lista = await obtenerPropiedades();
+  return filtrarPropiedades(lista, params);
+}
+
+async function obtenerPropiedad(id) {
+  if (modo === 'api') {
+    return fetchJSON(`${API.properties}/${id}`);
+  }
+  const lista = await obtenerPropiedades();
+  const prop = lista.find((p) => p.id === Number(id));
+  if (!prop) throw new Error('No encontrado');
+  return prop;
+}
+
+async function obtenerCategorias() {
+  if (modo === 'api') {
+    return fetchJSON(API.categorias);
+  }
+  const lista = await obtenerPropiedades();
+  return [...new Set(lista.map((p) => p.categoria))];
+}
+
+async function obtenerCiudades() {
+  if (modo === 'api') {
+    return fetchJSON(API.ciudades);
+  }
+  const lista = await obtenerPropiedades();
+  return [...new Set(lista.map((p) => `${p.ciudad}, ${p.pais}`))];
+}
+
+function leerReservasLocal() {
+  try {
+    return JSON.parse(localStorage.getItem(BOOKINGS_KEY) || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function guardarReservasLocal(reservas) {
+  localStorage.setItem(BOOKINGS_KEY, JSON.stringify(reservas));
+}
+
+async function enlistarReservas() {
+  if (modo === 'api') {
+    return fetchJSON(API.bookings);
+  }
+  return leerReservasLocal();
+}
+
+async function crearReservaEnBD(propertyId, datos) {
+  if (modo === 'api') {
+    const res = await fetch(API.bookings, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ propertyId, ...datos })
+    });
+    const resultado = await res.json();
+    if (!res.ok) throw new Error(resultado.error);
+    return resultado.booking;
+  }
+
+  const property = await obtenerPropiedad(propertyId);
+  const inicio = new Date(datos.fechaInicio);
+  const fin = new Date(datos.fechaFin);
+  if (inicio >= fin) {
+    throw new Error('La fecha de fin debe ser posterior a la de inicio');
+  }
+  const noches = Math.ceil((fin - inicio) / 86400000);
+  const booking = {
+    id: Date.now(),
+    propertyId: Number(propertyId),
+    propertyTitulo: property.titulo,
+    nombre: datos.nombre,
+    email: datos.email,
+    fechaInicio: datos.fechaInicio,
+    fechaFin: datos.fechaFin,
+    noches,
+    huespedes: Number(datos.huespedes),
+    total: noches * property.precioPorNoche
+  };
+  const reservas = leerReservasLocal();
+  reservas.push(booking);
+  guardarReservasLocal(reservas);
+  return booking;
+}
+
+// ---------- Render ----------
 
 function renderCard(p) {
   const card = document.createElement('article');
@@ -86,7 +227,7 @@ async function cargarPropiedades() {
   if (precio && precio !== '20000') params.set('precioMax', precio);
 
   try {
-    const props = await fetchJSON(`${API.properties}?${params.toString()}`);
+    const props = await buscarPropiedades(params);
     props.forEach((p) => grid.appendChild(renderCard(p)));
     mostrarResultado(props.length);
     $('#btnLimpiarFiltros').hidden = params.size === 0;
@@ -97,8 +238,8 @@ async function cargarPropiedades() {
 
 async function cargarFiltros() {
   const [categorias, ciudades] = await Promise.all([
-    fetchJSON(API.categorias),
-    fetchJSON(API.ciudades)
+    obtenerCategorias(),
+    obtenerCiudades()
   ]);
   const selCat = $('#filtroCategoria');
   categorias.forEach((c) => {
@@ -124,7 +265,7 @@ function escaparHTML(str) {
 
 async function abrirDetalle(id) {
   try {
-    const p = await fetchJSON(`${API.properties}/${id}`);
+    const p = await obtenerPropiedad(id);
     const galeria = p.imagenes
       .map((img, i) => `<img src="${img}?w=800&q=80" alt="${escaparHTML(p.titulo)} ${i + 1}">`)
       .join('');
@@ -224,16 +365,10 @@ function cerrarDetalle() {
 
 async function crearReserva(propertyId, datos) {
   try {
-    const res = await fetch(API.bookings, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ propertyId, ...datos })
-    });
-    const resultado = await res.json();
-    if (!res.ok) throw new Error(resultado.error);
+    const booking = await crearReservaEnBD(propertyId, datos);
     await verReservas();
     cerrarDetalle();
-    mostrarToast(`✅ Reserva confirmada (n° ${resultado.booking.id})`);
+    mostrarToast(`✅ Reserva confirmada (n° ${booking.id})`);
   } catch (err) {
     mostrarToast(`❌ ${err.message}`);
   }
@@ -241,7 +376,7 @@ async function crearReserva(propertyId, datos) {
 
 async function verReservas() {
   try {
-    const bookings = await fetchJSON(API.bookings);
+    const bookings = await enlistarReservas();
     const body = $('#modalReservasBody');
     if (!bookings.length) {
       body.innerHTML = '<h2>Mis reservas</h2><p style="color:var(--texto-suave);margin-top:10px;">Aún no tienes reservas. ¡Explora y encuentra tu próximo destino!</p>';
@@ -313,6 +448,8 @@ document.addEventListener('keydown', (e) => {
 
 // ---------- Init ----------
 (async () => {
+  await detectarModo();
+  console.log(`HabitaGo en modo: ${modo}`);
   await cargarFiltros();
   cargarPropiedades();
 })();
