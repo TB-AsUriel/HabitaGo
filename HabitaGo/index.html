@@ -19,19 +19,19 @@
 
       <div class="search-bar" id="searchBar">
         <div class="search-bar__field">
-          <label>Destino</label>
+          <label for="inputDestino">Destino</label>
           <input type="text" id="inputDestino" placeholder="¿A dónde vas?" value="">
         </div>
         <div class="search-bar__field search-bar__field--dates">
-          <label>Llegada</label>
+          <label for="inputLlegada">Llegada</label>
           <input type="date" id="inputLlegada">
         </div>
         <div class="search-bar__field search-bar__field--dates">
-          <label>Salida</label>
+          <label for="inputSalida">Salida</label>
           <input type="date" id="inputSalida">
         </div>
         <div class="search-bar__field">
-          <label>Huéspedes</label>
+          <label for="inputHuespedes">Huéspedes</label>
           <input type="number" id="inputHuespedes" min="1" max="16" placeholder="¿Cuántos?">
         </div>
         <button class="search-bar__button" id="btnBuscar" aria-label="Buscar">
@@ -42,20 +42,24 @@
         </button>
       </div>
 
-      <button class="btn-ver-reservas" id="btnVerReservas">🗓️ Mis reservas</button>
+      <div class="header__actions">
+        <button class="btn-header btn-header--destacado" id="btnPublicar">🏡 Publica tu casa</button>
+        <button class="btn-header" id="btnAnfitrion">🧹 Panel anfitrión</button>
+        <button class="btn-header" id="btnVerReservas">🗓️ Mis reservas</button>
+      </div>
     </div>
   </header>
 
   <main>
     <section class="filters" id="filters">
       <div class="filters__row">
-        <select id="filtroCategoria" class="filters__select">
+        <select id="filtroCategoria" class="filters__select" aria-label="Categoría">
           <option value="">Categoría</option>
         </select>
-        <select id="filtroCiudad" class="filters__select">
+        <select id="filtroCiudad" class="filters__select" aria-label="Ciudad">
           <option value="">Ciudad</option>
         </select>
-        <select id="filtroPrecio" class="filters__select">
+        <select id="filtroPrecio" class="filters__select" aria-label="Precio máximo">
           <option value="20000">Cualquier precio</option>
           <option value="1000">Hasta $1,000</option>
           <option value="2000">Hasta $2,000</option>
@@ -72,7 +76,7 @@
     <section class="empty-state" id="emptyState" hidden>
       <span class="empty-state__icon">🔍</span>
       <h2>No encontramos alojamientos</h2>
-      <p>Prueba con otra ciudad, cambia los filtros o reduce el número de huéspedes.</p>
+      <p>Prueba con otra ciudad, cambia las fechas o los filtros, o reduce el número de huéspedes.</p>
     </section>
   </main>
 
@@ -80,24 +84,45 @@
     <p>HabitaGo &copy; 2026 — Proyecto educativo inspirado en Airbnb</p>
   </footer>
 
+  <!-- Detalle de alojamiento + reserva -->
   <div class="modal" id="modalDetalle" hidden>
     <div class="modal__overlay" id="modalOverlay"></div>
-    <div class="modal__content">
+    <div class="modal__content" role="dialog" aria-modal="true">
       <button class="modal__close" id="modalCerrar" aria-label="Cerrar">&times;</button>
       <div id="modalBody"></div>
     </div>
   </div>
 
+  <!-- Mis reservas -->
   <div class="modal" id="modalReservas" hidden>
     <div class="modal__overlay" id="modalReservasOverlay"></div>
-    <div class="modal__content">
+    <div class="modal__content" role="dialog" aria-modal="true">
       <button class="modal__close" id="modalReservasCerrar" aria-label="Cerrar">&times;</button>
       <div id="modalReservasBody"></div>
     </div>
   </div>
 
+  <!-- Publicar casa -->
+  <div class="modal" id="modalPublicar" hidden>
+    <div class="modal__overlay" id="modalPublicarOverlay"></div>
+    <div class="modal__content" role="dialog" aria-modal="true">
+      <button class="modal__close" id="modalPublicarCerrar" aria-label="Cerrar">&times;</button>
+      <div id="modalPublicarBody"></div>
+    </div>
+  </div>
+
+  <!-- Panel del anfitrión -->
+  <div class="modal" id="modalAnfitrion" hidden>
+    <div class="modal__overlay" id="modalAnfitrionOverlay"></div>
+    <div class="modal__content" role="dialog" aria-modal="true">
+      <button class="modal__close" id="modalAnfitrionCerrar" aria-label="Cerrar">&times;</button>
+      <div id="modalAnfitrionBody"></div>
+    </div>
+  </div>
+
   <div class="toast" id="toast" hidden></div>
 
+  <script src="js/reglas.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

@@ -4,3 +4,4 @@ npm-debug.log*
 .vscode/
 .DS_Store
 data/bookings.json
+data/cleanings.json
